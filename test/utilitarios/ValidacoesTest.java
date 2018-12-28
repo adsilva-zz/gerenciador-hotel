@@ -34,6 +34,7 @@ public class ValidacoesTest {
 		String cpf7 = "77777777777";
 		String cpf8 = "88888888888";
 		String cpf9 = "99999999999";
+		String cpf10 = "           ";
 		Assert.assertNull(cpfNula);
 		Assert.assertFalse(Validacoes.validarCpf(cpf));
 		Assert.assertFalse(Validacoes.validarCpf(cpfMaior));
@@ -47,6 +48,7 @@ public class ValidacoesTest {
 		Assert.assertFalse(Validacoes.validarCpf(cpf7));
 		Assert.assertFalse(Validacoes.validarCpf(cpf8));
 		Assert.assertFalse(Validacoes.validarCpf(cpf9));
+		Assert.assertFalse(Validacoes.validarCpf(cpf10));
 	}
 
 	@Test

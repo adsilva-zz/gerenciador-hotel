@@ -37,10 +37,10 @@ public class ReservaRepositorioBDImpl implements ReservaRepositorio {
 	}
 
 	@Override
-	public boolean deletarReserva(Reserva reserva) {
+	public boolean deletarReserva(int idReserva) {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("delete from reserva where id=?");
-			stmt.setInt(1, reserva.getIdReserva());
+			stmt.setInt(1, idReserva);
 			stmt.execute();
 			stmt.close();
 			return true;

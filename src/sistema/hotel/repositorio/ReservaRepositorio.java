@@ -16,7 +16,7 @@ public interface ReservaRepositorio {
 
 	public boolean cadastrarReserva(Reserva reserva);
 
-	public boolean deletarReserva(Reserva reserva);
+	public boolean deletarReserva(int idReserva);
 
 	public boolean atualizarReserva(Reserva reserva, int idReserva);
 

@@ -42,11 +42,11 @@ public class ReservaServicoImpl implements ReservaServico {
 	 * @return true se a reserva for deletada com sucesso.
 	 */
 	@Override
-	public boolean deletarReserva(Reserva reserva) {
-		if (reserva == null) {
+	public boolean deletarReserva(int idReserva) {
+		if (idReserva <= 0) {
 			throw new IllegalArgumentException("Reserva inválida.");
 		}
-		return reservaRepositorio.deletarReserva(reserva);
+		return reservaRepositorio.deletarReserva(idReserva);
 	}
 
 	/**

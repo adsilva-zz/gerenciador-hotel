@@ -7,7 +7,7 @@ import sistema.hotel.modelo.Cliente;
 import sistema.hotel.repositorio.ClienteRepositorio;
 
 /**
- * Classe implemente a interface Cliente Repositorio para realizar ações no
+ * Classe implementa a interface Cliente Repositorio para realizar ações no
  * repositório.
  * 
  * @author Amanda da Silva Ito

@@ -18,14 +18,14 @@ public interface ReservaServico {
 
 	public boolean cadastrarReserva(Reserva reserva);
 
-	public boolean deletarReserva(Reserva reserva);
+	public boolean deletarReserva(int idReserva);
 
 	public boolean atualizarReserva(Reserva reserva, int idReserva);
 
 	public List<Reserva> getReservas();
 
 	public Reserva getReserva(int idReserva);
-	
+
 	public boolean validarReserva(int idQuarto, int idPromocao, int idCliente, double valor, LocalDate dataEntrada,
 			LocalDate dataSaida);
 

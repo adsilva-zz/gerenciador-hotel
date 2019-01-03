@@ -42,7 +42,13 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
 	 * @return true se a reserva for deletada com sucesso.
 	 */
 	@Override
-	public boolean deletarReserva(Reserva reserva) {
+	public boolean deletarReserva(int idReserva) {
+		Reserva reserva = null;
+		for (Reserva r : listaReservas) {
+			if (r.getIdReserva() == idReserva) {
+				reserva = r;
+			}
+		}
 		return listaReservas.remove(reserva);
 	}
 

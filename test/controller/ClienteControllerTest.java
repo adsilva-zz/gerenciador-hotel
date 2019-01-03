@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sistema.hotel.controller.ClienteController;
-import sistema.hotel.modelo.Cliente;
 
 public class ClienteControllerTest {
 

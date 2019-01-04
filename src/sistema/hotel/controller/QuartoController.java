@@ -112,12 +112,12 @@ public class QuartoController {
 	 * @param idQuarto
 	 * @return true se o item for adicionado com sucesso
 	 */
-//	public boolean addItem(String item, int idQuarto) {
-//		if (item == null || idQuarto <= 0) {
-//			return false;
-//		}
-//		return quartoServico.addItens(item, idQuarto);
-//	}
+	// public boolean addItem(String item, int idQuarto) {
+	// if (item == null || idQuarto <= 0) {
+	// return false;
+	// }
+	// return quartoServico.addItens(item, idQuarto);
+	// }
 
 	/**
 	 * Método remove um item da lista de itens do quarto, após verificar se os

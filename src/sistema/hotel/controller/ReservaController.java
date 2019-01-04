@@ -36,13 +36,13 @@ public class ReservaController {
 	 * @return true se a reserva for cadastrada com sucesso e false se não for
 	 *         cadastrado.
 	 */
-	public boolean cadastrarReserva(int idQuarto, int idPromocao, int idCliente, double valor, LocalDate dataEntrada,
+	public boolean cadastrarReserva(int idQuarto, int idPromocao, int idCliente, LocalDate dataEntrada,
 			LocalDate dataSaida) {
 
-		if (!reservaServico.validarReserva(idQuarto, idPromocao, idCliente, valor, dataEntrada, dataSaida)) {
+		if (!reservaServico.validarReserva(idQuarto, idPromocao, idCliente,0, dataEntrada, dataSaida)) {
 			return false;
 		}
-		Reserva reserva = new Reserva(idQuarto, idPromocao, idCliente, valor, dataEntrada, dataSaida);
+		Reserva reserva = new Reserva(idQuarto, idPromocao, idCliente, 0, dataEntrada, dataSaida);
 		return reservaServico.cadastrarReserva(reserva);
 	}
 

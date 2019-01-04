@@ -2,8 +2,6 @@ package sistema.hotel.modelo;
 
 import java.time.LocalDate;
 
-import sistema.hotel.enuns.TipoPromocao;
-
 /**
  * Classe Promoção do Hotel
  * 
@@ -17,20 +15,20 @@ public class Promocao {
 	private String nome;
 	private LocalDate dataValidade;
 	private LocalDate dataCadastro;
-	private TipoPromocao tipo;
+	private Double valor;
 	private static int geradorIds;
 
 	public Promocao() {
 
 	}
 
-	public Promocao(String nome, LocalDate dataValidade, TipoPromocao tipo) {
+	public Promocao(String nome, LocalDate dataValidade, Double valor) {
 		geradorIds += 1;
 		this.idPromocao = geradorIds;
 		this.nome = nome;
 		this.dataCadastro = LocalDate.now();
 		this.dataValidade = dataValidade;
-		this.tipo = tipo;
+		this.valor = valor;
 	}
 
 	public String getNome() {
@@ -49,12 +47,12 @@ public class Promocao {
 		this.dataValidade = dataValidade;
 	}
 
-	public TipoPromocao getTipo() {
-		return tipo;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setTipo(TipoPromocao tipo) {
-		this.tipo = tipo;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	public int getIdPromocao() {
@@ -72,7 +70,7 @@ public class Promocao {
 	@Override
 	public String toString() {
 		return "Promocao [idPromocao=" + idPromocao + ", nome=" + nome + ", dataValidade=" + dataValidade
-				+ ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + "]";
+				+ ", dataCadastro=" + dataCadastro + ", valor=" + valor + "]";
 	}
 
 }

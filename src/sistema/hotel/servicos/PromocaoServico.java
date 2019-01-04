@@ -26,6 +26,6 @@ public interface PromocaoServico {
 	public List<Promocao> getPromocoes();
 
 	public Promocao getPromocao(int idPromocao);
-	
-	public boolean validarPromocao(String nome, LocalDate dataValidade, TipoPromocao tipo);
+
+	public boolean validarPromocao(String nome, LocalDate dataValidade);
 }

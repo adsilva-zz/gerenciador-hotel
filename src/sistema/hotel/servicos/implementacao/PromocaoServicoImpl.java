@@ -114,8 +114,8 @@ public class PromocaoServicoImpl implements PromocaoServico {
 	 * @return true se os parametros forem válidos.
 	 */
 	@Override
-	public boolean validarPromocao(String nome, LocalDate dataValidade, TipoPromocao tipo) {
-		if (nome.trim().equals("") || nome == null || tipo == null) {
+	public boolean validarPromocao(String nome, LocalDate dataValidade) {
+		if (nome.trim().equals("") || nome == null) {
 			return false;
 		}
 		if (!Validacoes.validarDataValidade(dataValidade)) {

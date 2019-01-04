@@ -3,7 +3,6 @@ package sistema.hotel.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import sistema.hotel.enuns.TipoPromocao;
 import sistema.hotel.modelo.Promocao;
 import sistema.hotel.servicos.PromocaoServico;
 import sistema.hotel.servicos.implementacao.PromocaoServicoImpl;
@@ -36,12 +35,12 @@ public class PromocaoController {
 	 *            da promoção
 	 * @return true se a promoção for cadastrada com sucesso
 	 */
-	public boolean cadastrarPromocao(String nome, LocalDate dataValidade, TipoPromocao tipo) {
-		if (!promocaoServico.validarPromocao(nome, dataValidade, tipo)) {
+	public boolean cadastrarPromocao(String nome, LocalDate dataValidade, Double valor) {
+		if (!promocaoServico.validarPromocao(nome, dataValidade)) {
 			return false;
 		}
 
-		Promocao promocao = new Promocao(nome, dataValidade, tipo);
+		Promocao promocao = new Promocao(nome, dataValidade, valor);
 		return promocaoServico.cadastrarPromocao(promocao);
 	}
 
@@ -59,14 +58,14 @@ public class PromocaoController {
 	 *            atualizado
 	 * @return true se a promoção for atualizada com sucesso.
 	 */
-	public boolean atualizarPromocao(int idPromocao, String nome, LocalDate dataValidade, TipoPromocao tipo) {
+	public boolean atualizarPromocao(int idPromocao, String nome, LocalDate dataValidade, Double valor) {
 		if (idPromocao <= 0) {
 			return false;
 		}
-		if (!promocaoServico.validarPromocao(nome, dataValidade, tipo)) {
+		if (!promocaoServico.validarPromocao(nome, dataValidade)) {
 			return false;
 		}
-		Promocao promocao = new Promocao(nome, dataValidade, tipo);
+		Promocao promocao = new Promocao(nome, dataValidade, valor);
 		return promocaoServico.atualizarPromocao(promocao, idPromocao);
 	}
 

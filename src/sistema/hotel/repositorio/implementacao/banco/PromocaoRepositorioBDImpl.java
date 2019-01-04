@@ -20,13 +20,12 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 
 	@Override
 	public boolean cadastrarPromocao(Promocao promocao) {
-		String sql = "insert into promocao (nome,dataValidade,dataCadastro,tipoPromocao) values(?,?,?,?)";
+		String sql = "insert into promocao (nome,dataValidade,dataCadastro) values(?,?,?,)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, promocao.getNome());
 			stmt.setString(2, promocao.getDataValidade().toString());
 			stmt.setString(3, promocao.getDataCadastro().toString());
-			stmt.setString(4, promocao.getTipo().toString());
 			stmt.execute();
 			stmt.close();
 			return true;
@@ -50,13 +49,12 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 
 	@Override
 	public boolean atualizarPromocao(Promocao promocaoNova, int idPromocao) {
-		String sql = "update promocao set nome=?, dataValidade=?, dataCadastro=?, tipoPromocao=? where id=?";
+		String sql = "update promocao set nome=?, dataValidade=?, dataCadastro=? where id=?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, promocaoNova.getNome());
 			stmt.setString(2, promocaoNova.getDataValidade().toString());
 			stmt.setString(3, promocaoNova.getDataCadastro().toString());
-			stmt.setString(4, promocaoNova.getTipo().toString());
 			stmt.setInt(5, idPromocao);
 			stmt.execute();
 			stmt.close();
@@ -79,7 +77,6 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyy-MM-dd");
 				p.setDataValidade(LocalDate.parse(rs.getString("dataValidade"), format));
 				p.setDataCadastro(LocalDate.parse(rs.getString("dataCadastro"), format));
-				p.setTipo(TipoPromocao.valueOf(rs.getString("tipoPromocao")));
 
 				listaPromocoes.add(p);
 			}
@@ -104,7 +101,6 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyy-MM-dd");
 				p.setDataValidade(LocalDate.parse(rs.getString("dataValidade"), format));
 				p.setDataCadastro(LocalDate.parse(rs.getString("dataCadastro"), format));
-				p.setTipo(TipoPromocao.valueOf(rs.getString("tipoPromocao")));
 			}
 
 			stmt.close();

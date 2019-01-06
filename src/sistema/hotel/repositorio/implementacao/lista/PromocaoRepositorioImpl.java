@@ -68,6 +68,7 @@ public class PromocaoRepositorioImpl implements PromocaoRepositorio {
 			if (p.getIdPromocao() == idPromocao) {
 				p.setDataValidade(promocaoNova.getDataValidade());
 				p.setNome(promocaoNova.getNome());
+				p.setValor(promocaoNova.getValor());
 				return true;
 			}
 		}

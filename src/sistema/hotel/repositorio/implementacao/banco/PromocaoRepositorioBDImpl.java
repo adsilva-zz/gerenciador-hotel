@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistema.hotel.config.ConnectFactory;
-import sistema.hotel.enuns.TipoPromocao;
 import sistema.hotel.modelo.Promocao;
 import sistema.hotel.repositorio.PromocaoRepositorio;
 
@@ -20,12 +19,13 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 
 	@Override
 	public boolean cadastrarPromocao(Promocao promocao) {
-		String sql = "insert into promocao (nome,dataValidade,dataCadastro) values(?,?,?,)";
+		String sql = "insert into promocao (nome,dataValidade,dataCadastro, valor) values(?,?,?,?)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, promocao.getNome());
 			stmt.setString(2, promocao.getDataValidade().toString());
 			stmt.setString(3, promocao.getDataCadastro().toString());
+			stmt.setDouble(4, promocao.getValor());
 			stmt.execute();
 			stmt.close();
 			return true;
@@ -49,12 +49,13 @@ public class PromocaoRepositorioBDImpl implements PromocaoRepositorio {
 
 	@Override
 	public boolean atualizarPromocao(Promocao promocaoNova, int idPromocao) {
-		String sql = "update promocao set nome=?, dataValidade=?, dataCadastro=? where id=?";
+		String sql = "update promocao set nome=?, dataValidade=?, dataCadastro=?, valor=? where id=?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, promocaoNova.getNome());
 			stmt.setString(2, promocaoNova.getDataValidade().toString());
 			stmt.setString(3, promocaoNova.getDataCadastro().toString());
+			stmt.setDouble(4, promocaoNova.getValor());
 			stmt.setInt(5, idPromocao);
 			stmt.execute();
 			stmt.close();

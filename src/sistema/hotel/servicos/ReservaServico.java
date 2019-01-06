@@ -26,13 +26,13 @@ public interface ReservaServico {
 
 	public Reserva getReserva(int idReserva);
 
-	public boolean validarReserva(int idQuarto, int idPromocao, int idCliente, double valor, LocalDate dataEntrada,
+	public boolean validarReserva(int idQuarto, int idPromocao, int idCliente, LocalDate dataEntrada,
 			LocalDate dataSaida);
 
-	public boolean validarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto);
+	public boolean verificarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto);
 
 	public double calcularValorReserva(LocalDate dataEntrada, LocalDate dataSaida, double valorDoQuarto);
 
-	public double aplicarDescontoReserva(double valorReserva, int idPromocao);
+	public double aplicarDescontoReserva(double valorReserva, double valorPromocao);
 
 }

@@ -3,8 +3,14 @@ package sistema.hotel.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import sistema.hotel.modelo.Promocao;
+import sistema.hotel.modelo.Quarto;
 import sistema.hotel.modelo.Reserva;
+import sistema.hotel.servicos.PromocaoServico;
+import sistema.hotel.servicos.QuartoServico;
 import sistema.hotel.servicos.ReservaServico;
+import sistema.hotel.servicos.implementacao.PromocaoServicoImpl;
+import sistema.hotel.servicos.implementacao.QuartoServicoImpl;
 import sistema.hotel.servicos.implementacao.ReservaServicoImpl;
 
 /**
@@ -18,8 +24,14 @@ public class ReservaController {
 
 	private ReservaServico reservaServico;
 
+	private QuartoServico quartoServico;
+
+	private PromocaoServico promocaoServico;
+
 	public ReservaController() {
 		reservaServico = new ReservaServicoImpl();
+		quartoServico = new QuartoServicoImpl();
+		promocaoServico = new PromocaoServicoImpl();
 	}
 
 	/**
@@ -39,10 +51,27 @@ public class ReservaController {
 	public boolean cadastrarReserva(int idQuarto, int idPromocao, int idCliente, LocalDate dataEntrada,
 			LocalDate dataSaida) {
 
-		if (!reservaServico.validarReserva(idQuarto, idPromocao, idCliente,0, dataEntrada, dataSaida)) {
+		if (!reservaServico.validarReserva(idQuarto, idPromocao, idCliente, dataEntrada, dataSaida)) {
 			return false;
 		}
-		Reserva reserva = new Reserva(idQuarto, idPromocao, idCliente, 0, dataEntrada, dataSaida);
+		if (!reservaServico.verificarDisponibilidade(dataEntrada, dataSaida, idQuarto)) {
+			return false;
+		}
+
+		Quarto q = quartoServico.getQuarto(idQuarto);
+		if (q == null) {
+			return false;
+		}
+
+		double valorReserva = reservaServico.calcularValorReserva(dataEntrada, dataSaida, q.getValor());
+		double totalRerva = valorReserva;
+
+		Promocao p = promocaoServico.getPromocao(idPromocao);
+		if (p != null && promocaoServico.validarPromocao(p.getNome(), p.getDataValidade())) {
+			totalRerva = reservaServico.aplicarDescontoReserva(valorReserva, p.getValor());
+		}
+
+		Reserva reserva = new Reserva(idQuarto, idPromocao, idCliente, totalRerva, dataEntrada, dataSaida);
 		return reservaServico.cadastrarReserva(reserva);
 	}
 
@@ -58,7 +87,7 @@ public class ReservaController {
 		if (idReserva <= 0) {
 			return false;
 		}
-		if (!reservaServico.validarReserva(reserva.getIdQuarto(), idReserva, reserva.getIdCliente(), reserva.getValor(),
+		if (!reservaServico.validarReserva(reserva.getIdQuarto(), idReserva, reserva.getIdCliente(),
 				reserva.getDataEntrada(), reserva.getDataSaida())) {
 			return false;
 		}

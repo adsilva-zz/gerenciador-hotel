@@ -1,5 +1,6 @@
 package sistema.hotel.repositorio;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import sistema.hotel.modelo.Reserva;
@@ -23,4 +24,7 @@ public interface ReservaRepositorio {
 	public List<Reserva> getReservas();
 
 	public Reserva getReserva(int idReserva);
+
+	public boolean verificarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto);
+
 }

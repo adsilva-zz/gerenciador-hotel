@@ -120,4 +120,31 @@ public class ReservaRepositorioBDImpl implements ReservaRepositorio {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public boolean verificarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto) {
+		try {
+			Reserva reserva = new Reserva();
+			PreparedStatement stmt = connection.prepareStatement("select * from reserva where id=?");
+			stmt.setInt(1, idReserva);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				reserva.setValor(rs.getDouble("valor"));
+				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyy-MM-dd");
+				reserva.setDataEntrada(LocalDate.parse(rs.getString("dataEntrada"), format));
+				reserva.setDataSaida(LocalDate.parse(rs.getString("dataSaida"), format));
+				reserva.setIdQuarto(rs.getInt("idQuarto"));
+				reserva.setIdPromocao(rs.getInt("idPromocao"));
+				reserva.setIdCliente(rs.getInt("idCliente"));
+			}
+			stmt.close();
+			rs.close();
+			return reserva;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return false;
+	}
 }

@@ -1,6 +1,7 @@
 package sistema.hotel.servicos.implementacao;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import sistema.hotel.modelo.Reserva;
@@ -110,9 +111,9 @@ public class ReservaServicoImpl implements ReservaServico {
 	 * @return true se o paramentros forem válidos.
 	 */
 	@Override
-	public boolean validarReserva(int idQuarto, int idPromocao, int idCliente, double valor, LocalDate dataEntrada,
+	public boolean validarReserva(int idQuarto, int idPromocao, int idCliente, LocalDate dataEntrada,
 			LocalDate dataSaida) {
-		if (idQuarto <= 0 || idPromocao <= 0 || idCliente <= 0 || valor <= 0) {
+		if (idQuarto <= 0 || idPromocao <= 0 || idCliente <= 0) {
 			return false;
 		}
 		if (!Validacoes.validarDataEntrada(dataEntrada)) {
@@ -122,5 +123,21 @@ public class ReservaServicoImpl implements ReservaServico {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean verificarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto) {
+		return reservaRepositorio.verificarDisponibilidade(dataEntrada, dataSaida, idQuarto);
+	}
+
+	@Override
+	public double calcularValorReserva(LocalDate dataEntrada, LocalDate dataSaida, double valorDoQuarto) {
+		int dias = Period.between(dataEntrada, dataSaida).getDays();
+		return dias*valorDoQuarto;
+	}
+
+	@Override
+	public double aplicarDescontoReserva(double valorReserva, double valorPromocao) {
+		return valorReserva-valorPromocao;
 	}
 }

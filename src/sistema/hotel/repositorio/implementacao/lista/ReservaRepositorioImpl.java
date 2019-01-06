@@ -1,5 +1,6 @@
 package sistema.hotel.repositorio.implementacao.lista;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,5 +103,27 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean verificarDisponibilidade(LocalDate dataEntrada, LocalDate dataSaida, int idQuarto) {
+		List<Reserva> lista = new ArrayList<>();
+		for (Reserva reserva : listaReservas) {
+			if (idQuarto == reserva.getIdQuarto()
+					&& (reserva.getDataEntrada().equals(dataEntrada) && reserva.getDataSaida().equals(dataSaida)// Mesmo
+							|| dataEntrada.isAfter(reserva.getDataEntrada())
+									&& dataSaida.isBefore(reserva.getDataSaida()) // Dentro
+							|| dataEntrada.isAfter(reserva.getDataEntrada())
+									&& dataSaida.isAfter(reserva.getDataSaida()) // Dentroe
+							|| dataEntrada.isBefore(reserva.getDataEntrada())
+									&& dataSaida.isBefore(reserva.getDataSaida())
+							|| dataEntrada.isAfter(reserva.getDataEntrada())
+									&& dataSaida.isEqual(reserva.getDataSaida())
+							|| dataSaida.isEqual(reserva.getDataEntrada())
+									&& dataEntrada.isBefore(reserva.getDataEntrada()))) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
